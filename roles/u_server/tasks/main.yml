@@ -35,8 +35,6 @@
 
 - name: Cinder Restarting / Enabling
   service:
-    name:
-      - tgt
-      - cinder-volume
+    name: cinder-volume
     state: restarted
     enabled: true
