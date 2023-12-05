@@ -5,11 +5,11 @@
       - openstack-neutron-linuxbridge
       - ebtables
       - ipset
-    state: latest
+    state: present
 
 - name: Neutron Starting / Enabling
   service:
-    name: openstack-nova-compute.service
+    name: neutron-linuxbridge-agent
     state: started
     enabled: true
 
@@ -17,13 +17,11 @@
 - name: Install Horizon packages
   yum:
     name: openstack-dashboard
-    state: latest
+    state: present
 
 - name: Horizon Restarting / Enabling
   service:
-    name:
-      - httpd.service
-      - memcached.service
+    name: memcached
     state: restarted
     enabled: true
 
@@ -32,11 +30,10 @@
   yum:
     name:
       - openstack-cinder
-      - targetcli
-    state: latest
+    state: present
 
 - name: Cinder Starting / Enabling
   service:
-    name: openstack-cinder-volume.service target.service
+    name: openstack-cinder-api
     state: started
     enabled: true
